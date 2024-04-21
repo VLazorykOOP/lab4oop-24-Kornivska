@@ -151,6 +151,7 @@
     <ClInclude Include="ComplexVector.h" />
     <ClInclude Include="Lab4Exmaple.h" />
     <ClInclude Include="MyAssoc.h" />
+    <ClInclude Include="vectoruint.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
