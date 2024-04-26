@@ -1,19 +1,19 @@
 #include <iostream>
-#include <stdexcept> // Для виключень
-#include <unordered_map> // Для використання unordered_map
+#include <stdexcept> // Г„Г«Гї ГўГЁГЄГ«ГѕГ·ГҐГ­Гј
+#include <unordered_map> // Г„Г«Гї ГўГЁГЄГ®Г°ГЁГ±ГІГ Г­Г­Гї unordered_map
 #include <string>
 
-// Клас для роботи з беззнаковими цілими векторами
+// ГЉГ«Г Г± Г¤Г«Гї Г°Г®ГЎГ®ГІГЁ Г§ ГЎГҐГ§Г§Г­Г ГЄГ®ГўГЁГ¬ГЁ Г¶ВіГ«ГЁГ¬ГЁ ГўГҐГЄГІГ®Г°Г Г¬ГЁ
 class VectorUInt {
 private:
-    unsigned int* data; // Вказівник на масив беззнакових цілих чисел
-    size_t size; // Кількість елементів у векторі
-    int codeError; // Код помилки
+    unsigned int* data; // Г‚ГЄГ Г§ВіГўГ­ГЁГЄ Г­Г  Г¬Г Г±ГЁГў ГЎГҐГ§Г§Г­Г ГЄГ®ГўГЁГµ Г¶ВіГ«ГЁГµ Г·ГЁГ±ГҐГ«
+    size_t size; // ГЉВіГ«ГјГЄВіГ±ГІГј ГҐГ«ГҐГ¬ГҐГ­ГІВіГў Гі ГўГҐГЄГІГ®Г°Ві
+    int codeError; // ГЉГ®Г¤ ГЇГ®Г¬ГЁГ«ГЄГЁ
     
 public:
-    // Конструктори
+    // ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г°ГЁ
 
-    // Конструктор без параметрів
+    // ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЎГҐГ§ ГЇГ Г°Г Г¬ГҐГІГ°ВіГў
     VectorUInt() {
         size = 1;
         data = new unsigned int[size];
@@ -21,7 +21,7 @@ public:
         codeError = 0;
     }
 
-    // Конструктор з одним параметром - розмір вектора
+    // ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° Г§ Г®Г¤Г­ГЁГ¬ ГЇГ Г°Г Г¬ГҐГІГ°Г®Г¬ - Г°Г®Г§Г¬ВіГ° ГўГҐГЄГІГ®Г°Г 
     VectorUInt(size_t s) {
         size = s;
         data = new unsigned int[size];
@@ -31,7 +31,7 @@ public:
         codeError = 0;
     }
 
-    // Конструктор з двома параметрами - розмір вектора та значення ініціалізації
+    // ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° Г§ Г¤ГўГ®Г¬Г  ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ - Г°Г®Г§Г¬ВіГ° ГўГҐГЄГІГ®Г°Г  ГІГ  Г§Г­Г Г·ГҐГ­Г­Гї ВіГ­ВіГ¶ВіГ Г«ВіГ§Г Г¶ВіВї
     VectorUInt(size_t s, unsigned int value) {
         size = s;
         data = new unsigned int[size];
@@ -41,7 +41,7 @@ public:
         codeError = 0;
     }
 
-    // Конструктор копіювання
+    // ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЄГ®ГЇВіГѕГўГ Г­Г­Гї
     VectorUInt(const VectorUInt& other) {
         size = other.size;
         data = new unsigned int[size];
@@ -51,14 +51,14 @@ public:
         codeError = other.codeError;
     }
 
-    // Деструктор
+    // Г„ГҐГ±ГІГ°ГіГЄГІГ®Г°
     ~VectorUInt() {
         delete[] data;
     }
 
-    // Перевантаження операторів
+    // ГЏГҐГ°ГҐГўГ Г­ГІГ Г¦ГҐГ­Г­Гї Г®ГЇГҐГ°Г ГІГ®Г°ВіГў
 
-    // Унарні префіксні та постфіксні ++ та --
+    // Г“Г­Г Г°Г­Ві ГЇГ°ГҐГґВіГЄГ±Г­Ві ГІГ  ГЇГ®Г±ГІГґВіГЄГ±Г­Ві ++ ГІГ  --
     VectorUInt& operator++() {
         for (size_t i = 0; i < size; ++i) {
             ++data[i];
@@ -85,12 +85,12 @@ public:
         return temp;
     }
 
-    // Унарна логічна !
+    // Г“Г­Г Г°Г­Г  Г«Г®ГЈВіГ·Г­Г  !
     bool operator!() {
         return size != 0;
     }
 
-    // Унарна побітова ~
+    // Г“Г­Г Г°Г­Г  ГЇГ®ГЎВіГІГ®ГўГ  ~
     VectorUInt operator~() {
         VectorUInt result(*this);
         for (size_t i = 0; i < size; ++i) {
@@ -99,18 +99,18 @@ public:
         return result;
     }
 
-    // Унарний арифметичний -
-    VectorUInt operator-() {
-        VectorUInt result(*this);
+    // Г“Г­Г Г°Г­ГЁГ© Г Г°ГЁГґГ¬ГҐГІГЁГ·Г­ГЁГ© -
+    VectorUInt& operator-() {
+      
         for (size_t i = 0; i < size; ++i) {
             int signedValue = static_cast<int>(result.data[i]);
             signedValue = -signedValue;
-            result.data[i] = static_cast<unsigned int>(signedValue);
+            data[i] = static_cast<unsigned int>(signedValue);
         }
-        return result;
+        return *this;
     }
 
-    // Оператор присвоєння =
+    // ГЋГЇГҐГ°Г ГІГ®Г° ГЇГ°ГЁГ±ГўГ®ВєГ­Г­Гї =
     VectorUInt& operator=(const VectorUInt& other) {
         if (this != &other) {
             delete[] data;
@@ -124,7 +124,7 @@ public:
         return *this;
     }
 
-    // Оператори +=, -=, *=, /=, %=, |=, ^=, &= (бінарні)
+    // ГЋГЇГҐГ°Г ГІГ®Г°ГЁ +=, -=, *=, /=, %=, |=, ^=, &= (ГЎВіГ­Г Г°Г­Ві)
     VectorUInt& operator+=(const VectorUInt& other) {
         if (size != other.size) {
             throw std::invalid_argument("Vectors must be of the same size for addition");
@@ -145,7 +145,7 @@ public:
         return *this;
     }
 
-    // Арифметичні бінарні оператори +, -, *, /, %
+    // ГЂГ°ГЁГґГ¬ГҐГІГЁГ·Г­Ві ГЎВіГ­Г Г°Г­Ві Г®ГЇГҐГ°Г ГІГ®Г°ГЁ +, -, *, /, %
     VectorUInt operator+(const VectorUInt& other) const {
         if (size != other.size) {
             throw std::invalid_argument("Vectors must be of the same size for addition");
@@ -155,7 +155,7 @@ public:
         return result;
     }
 
-    // Оператор порівняння ==
+    // ГЋГЇГҐГ°Г ГІГ®Г° ГЇГ®Г°ВіГўГ­ГїГ­Г­Гї ==
     bool operator==(const VectorUInt& other) const {
         if (size != other.size) {
             return false;
@@ -168,7 +168,7 @@ public:
         return true;
     }
 
-    // Оператор індексації []
+    // ГЋГЇГҐГ°Г ГІГ®Г° ВіГ­Г¤ГҐГЄГ±Г Г¶ВіВї []
     unsigned int& operator[](size_t index) {
         if (index >= size) {
             codeError = 1;
@@ -177,12 +177,12 @@ public:
         return data[index];
     }
 
-    // Дружні функції для вводу та виводу
+    // Г„Г°ГіГ¦Г­Ві ГґГіГ­ГЄГ¶ВіВї Г¤Г«Гї ГўГўГ®Г¤Гі ГІГ  ГўГЁГўГ®Г¤Гі
     friend std::ostream& operator<<(std::ostream& os, const VectorUInt& vec);
     friend std::istream& operator>>(std::istream& is, VectorUInt& vec);
 };
 
-// Функції для виводу та вводу
+// Г”ГіГ­ГЄГ¶ВіВї Г¤Г«Гї ГўГЁГўГ®Г¤Гі ГІГ  ГўГўГ®Г¤Гі
 std::ostream& operator<<(std::ostream& os, const VectorUInt& vec) {
     os << "[ ";
     for (size_t i = 0; i < vec.size; ++i) {
@@ -199,22 +199,22 @@ std::istream& operator>>(std::istream& is, VectorUInt& vec) {
     return is;
 }
 
-// Клас для асоціативної сутності
+// ГЉГ«Г Г± Г¤Г«Гї Г Г±Г®Г¶ВіГ ГІГЁГўГ­Г®Вї Г±ГіГІГ­Г®Г±ГІВі
 class AssociativeEntity {
 private:
     std::unordered_map<std::string, std::string> associations;
     int codeError;
 
 public:
-    // Конструктор за замовчуванням
+    // ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° Г§Г  Г§Г Г¬Г®ГўГ·ГіГўГ Г­Г­ГїГ¬
     AssociativeEntity() : codeError(0) {}
 
-    // Додавання асоціативної сутності
+    // Г„Г®Г¤Г ГўГ Г­Г­Гї Г Г±Г®Г¶ВіГ ГІГЁГўГ­Г®Вї Г±ГіГІГ­Г®Г±ГІВі
     void addAssociation(const std::string& entity1, const std::string& entity2) {
         associations[entity1] = entity2;
     }
 
-    // Перевантаження оператора індексації []
+    // ГЏГҐГ°ГҐГўГ Г­ГІГ Г¦ГҐГ­Г­Гї Г®ГЇГҐГ°Г ГІГ®Г°Г  ВіГ­Г¤ГҐГЄГ±Г Г¶ВіВї []
     std::string& operator[](const std::string& entity) {
         if (associations.find(entity) == associations.end()) {
             codeError = 1;
@@ -224,17 +224,17 @@ public:
         return associations[entity];
     }
 
-    // Функція-оператор виклику ()
+    // Г”ГіГ­ГЄГ¶ВіГї-Г®ГЇГҐГ°Г ГІГ®Г° ГўГЁГЄГ«ГЁГЄГі ()
     std::string& operator()(const std::string& entity) {
         return (*this)[entity];
     }
 
-    // Дружні функції для виводу та вводу
+    // Г„Г°ГіГ¦Г­Ві ГґГіГ­ГЄГ¶ВіВї Г¤Г«Гї ГўГЁГўГ®Г¤Гі ГІГ  ГўГўГ®Г¤Гі
     friend std::istream& operator>>(std::istream& is, AssociativeEntity& ae);
     friend std::ostream& operator<<(std::ostream& os, const AssociativeEntity& ae);
 };
 
-// Функції для виводу та вводу
+// Г”ГіГ­ГЄГ¶ВіВї Г¤Г«Гї ГўГЁГўГ®Г¤Гі ГІГ  ГўГўГ®Г¤Гі
 std::istream& operator>>(std::istream& is, AssociativeEntity& ae) {
     std::string entity1, entity2;
     std::cout << "Enter entity1: ";
@@ -252,11 +252,11 @@ std::ostream& operator<<(std::ostream& os, const AssociativeEntity& ae) {
     return os;
 }
 
-// Головна функція
+// ГѓГ®Г«Г®ГўГ­Г  ГґГіГ­ГЄГ¶ВіГї
 int main() {
     int choice;
 
-    // Виведення меню та вибір операції
+    // Г‚ГЁГўГҐГ¤ГҐГ­Г­Гї Г¬ГҐГ­Гѕ ГІГ  ГўГЁГЎВіГ° Г®ГЇГҐГ°Г Г¶ВіВї
     std::cout << "Choose an operation:\n"
         << "1. Vector Operations\n"
         << "2. Associative Entity\n";
@@ -267,7 +267,7 @@ int main() {
     case 1: {
         std::cout << "Vector Operations\n";
 
-        // Виклик функцій для векторів
+        // Г‚ГЁГЄГ«ГЁГЄ ГґГіГ­ГЄГ¶ВіГ© Г¤Г«Гї ГўГҐГЄГІГ®Г°ВіГў
         VectorUInt vec1;
         std::cout << "vec1: " << vec1 << std::endl;
 
@@ -307,7 +307,7 @@ int main() {
     case 2: {
         std::cout << "Associative Entity\n";
 
-        // Виклик функцій для асоціативної сутності
+        // Г‚ГЁГЄГ«ГЁГЄ ГґГіГ­ГЄГ¶ВіГ© Г¤Г«Гї Г Г±Г®Г¶ВіГ ГІГЁГўГ­Г®Вї Г±ГіГІГ­Г®Г±ГІВі
         AssociativeEntity ae;
 
         ae.addAssociation("FlightNumber", "DepartureTime");
